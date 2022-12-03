@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<META HTTP-EQUIV="Cache-Control" CONTENT="no-cache, must-revalidate">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+		<script src="./papaparse.min.js"></script>
+		<title>Supplementary Material</title>
+        <style type="text/css">
+            body{
+            	background-color: white;
+            }
+			img{
+				max-width:80%;
+				max-height:80%;
+				width:auto;
+				height:auto;
+			}
+            .button {
+                width: 90px;
+                height: 40px;
+                border-radius: 2px;
+                border: 0px solid #ccc;
+                font-size: 20px;
+                color: white;
+                background-color: black;
+            }
+			.button_score {
+                width: 90px;
+                height: 40px;
+                border-radius: 2px;
+                border: 0px solid #ccc;
+                font-size: 20px;
+                color: white;
+                background-color: gray;
+			}
+			.button_score_select {
+                width: 90px;
+                height: 40px;
+                border-radius: 2px;
+                border: 0px solid #ccc;
+                font-size: 20px;
+                color: white;
+                background-color: red;
+			}
+			.mt{
+				border-collapse:collapse;
+				border:1px solid black;
+			}
+			.mt tr{
+				border-bottom:1px solid black;
+			}
+        </style>
+	</head>
+
+  <body>
+  	<div align="Center" style="padding:30px 100px 30px 100px;">
+		<p id="title"> <font size="6"> Low-Light Enhancement With Ambient Guidance via Deformable Band Regression </font> </p>
+		<p><font size="6"> (Supplementary Material) </font></p>
+		<br>
+		<p> Haofeng Huang, Shuhong Zheng, Wenhan Yang, Ling-Yu Duan, Jiaying Liu</p>
+		<br>
+		<br>
+		
+		<p><font size="5"> 1. Implementation Details</font></p>
+		<p>We adopt the Adam Optimizer [1] with an initial learning rate of 1 × 10<sup>−4</sup> and set hyperparameters at &beta;<sub>1</sub> = 0.9, &beta;<sub>2</sub> = 0.999 and the weight decay parameter equals to 1 × 10<sup>−4</sup>. We randomly crop 256 × 256 patches during training and adopt a two-stage training process. The model is first trained for 1.5 × 10<sup>5</sup> iterations. Then we finetune the model with an initial learning rate of 1 × 10<sup>−5</sup> for 3 × 10<sup>4</sup> iterations. The batch size of both training stages is 8. The model is trained on 4 NVIDIA Titan Xp GPUs. The whole training process takes about 20 hours.</p>
+		<br>
+		<br>
+		
+		<p><font size="5"> 2. Implementation of the Compared Methods</font></p>
+		<p>The code links of all the compared methods are listed in Table 1. Thanks to the authors for sharing their codes, which is very helpful for our research work. For the single-image low-light enhancement methods [2, 3, 4, 5], we all use the officially released pretrained models on LOL dataset [2] for evaluation. For the single-image deblurring methods [6, 7], we retrain the models using the blurry/sharp image pairs in the LEC-LOL dataset. For the joint denoising and deblurring method [8], we follow the same training strategy of LECNet.</p>
+		<br>
+		
+		<p>Table 1. Code links of the compared methods.</p>
+		<table class='mt'>
+		<tr></tr>
+		<tr>
+		<th align="left">Method</th>
+		<th>&emsp; </th>
+		<th align="left">Code Link</th>
+		</tr>
+		<tr>
+		<td>Retinex-Net [2]</td>
+		<th>&emsp; </th>
+		<td><a href="https://github.com/weichen582/RetinexNet">https://github.com/weichen582/RetinexNet</a></td>
+		</tr>
+		<tr>
+		<td>KinD [3]</td>
+		<th>&emsp;</th>
+		<td><a href="https://github.com/zhangyhuaee/KinD">https://github.com/zhangyhuaee/KinD</a></td>
+		</tr>
+		<tr>
+		<td>KinD++ [4]</td>
+		<th>&emsp;</th>
+		<td><a href="https://github.com/zhangyhuaee/KinD_plus">https://github.com/zhangyhuaee/KinD_plus</a></td>
+		</tr>
+		<tr>
+		<td>RUAS [5]</td>
+		<th>&emsp;</th>
+		<td><a href="https://github.com/KarelZhang/RUAS">https://github.com/KarelZhang/RUAS</a></td>
+		</tr>
+		<tr>
+		<td>MPRNet [6]</td>
+		<th>&emsp;</th>
+		<td><a href="https://github.com/swz30/MPRNet">https://github.com/swz30/MPRNet</a></td>
+		</tr>
+		<tr>
+		<td>MIMO-UNet [7]</td>
+		<th>&emsp;</th>
+		<td><a href="https://github.com/chosj95/MIMO-UNet">https://github.com/chosj95/MIMO-UNet</a></td>
+		</tr>
+		<tr>
+		<td>LSD2 [8]</td>
+		<th>&emsp;</th>
+		<td><a href="https://github.com/jannemus/LSD2">https://github.com/jannemus/LSD2</a></td>
+		</tr>
+		</table>
+		
+		<br>
+		<br>
+		<p><font size="5"> 3. Results on Low-Light Inputs at Different Illumination Levels</font></p>
+		<p>In this section, we show the experimental results of using the same long-exposure reference to enhance the low-light images with different illuminance levels. The results can be seen in Fig. 1. We can observe that for the single-image low-light enhancement models [4, 5], the illuminance level of the enhanced image goes up as the input low-light image gradually becomes brighter. Thus, their predictions frequently fall into overexposure or underexposure when the illumination of their inputs is relatively high or low. However, there is no more ambiguity for our LECNet. The predictions from our LECNet all match the illumination of the given long-exposure reference. It also demonstrates that our LECNet obtains the illumination information entirely from the long-exposure image. Therefore, it is not disrupted by the illuminance level of the input low-light image.</p>
+		
+		<img src="imgs/diff_input.png">
+		<p>Figure 1. Qualitative results of using 7 different low-light inputs with increasing illuminance levels (Level I: lowest illuminance level, Level VII: highest illuminance level). The results of single-image enhancement methods (KinD++ [4] and RUAS [5]) vary greatly when the input low-light image changes. By contrast, outputs of our LECNet are roughly the same, with the illuminations matching the long-exposure reference.</p>
+		
+		<br>
+		<br>
+		<p><font size="5"> 4. More Experimental Results </font></p>
+		<p>More visual results of our LECNet compared with other methods are referred to Figs. 2-4. The results of our LECNet are closer to the ground truth with clear details and consistent illumination levels.</p>
+		
+		<img src="imgs/results_1.png">
+		
+		<img src="imgs/results_2.png">
+		
+		<img src="imgs/results_3.png">
+		<p>Figure 2. More qualitative comparison with other methods. The top two rows show the results in the LEC-LOL-Syn dataset. The bottom two rows show the results in the LEC-LOL-Real dataset.</p>
+		<br>
+		<br>
+		<p align="left">References</p>
+		<p align="left">[1] Diederik P. Kingma and Jimmy Ba, “Adam: A method for stochastic optimization,” in ICLR, 2015.</p>
+		<p align="left">[2] Chen Wei, Wenjing Wang, Wenhan Yang, and Jiaying Liu, “Deep retinex decomposition for low-light enhancement,” in BMVC, 2018.</p>
+		<p align="left">[3] Yonghua Zhang, Jiawan Zhang, and Xiaojie Guo, “Kindling the darkness: A practical low-light image enhancer,” in ACM MM, 2019.</p>
+		<p align="left">[4] Yonghua Zhang, Xiaojie Guo, Jiayi Ma, Wei Liu, and Jiawan Zhang, “Beyond brightening low-light images,” IJCV, vol. 129, no. 2, pp. 1013–1037, 2021.</p>
+		<p align="left">[5] Risheng Liu, Long Ma, Jia’ao Zhang, Xin Fan, and Zhongxuan Luo, “Retinex-inspired unrolling with cooperative prior architecture search for low-light image enhancement,” in CVPR, 2021.</p>
+		<p align="left">[6] Syed Waqas Zamir, Aditya Arora, Salman Khan, Munawar Hayat, Fahad Shahbaz Khan, Ming-Hsuan Yang, and Ling Shao, “Multi-stage progressive image restoration,” in CVPR, 2021.</p>
+		<p align="left">[7] Sung-Jin Cho, Seo-Won Ji, Jun-Pyo Hong, Seung-Won Jung, and Sung-Jea Ko, “Rethinking coarse-to-fine approach in single image deblurring,” in ICCV, 2021.</p>
+		<p align="left">[8] Janne Mustaniemi, Juho Kannala, Jiri Matas, Simo S¨arkk¨a, and Janne Heikkil¨a, “LSD2 - joint denoising and deblurring of short and long exposure images with cnns,” in BMVC, 2020.</p>
+		
+	</div>
+  </body>
+</html>
+
