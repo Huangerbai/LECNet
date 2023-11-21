@@ -70,9 +70,13 @@
 		3)	take a photo with short exposure (low light image collected),<br>
 		4)	switch the shutter speed using remote control and take a photo with long exposure (normal light image collected),<br>
 		5)	relax the tripod, take a long exposure photo with apparent motion (blurry ambient guidance collected).</p>
-		<p align="left">We collect 300 triplets of data as an evaluation dataset for low light enhancement or deblurring or joint enhancement. Note that two versions of blurry ambient guidance are provided: a) blurry image is aligned with the normal light image, <i>i.e.</i> the normal light image serves as the beginning of the motion, and b) blurry image is NOT aligned with the normal light image. The former is for deblurring task and the latter is for joint enhancement where misalignment can not be avoided.</p>
+		<p align="left">We collect 300 triplets of data as an evaluation dataset for low light enhancement or deblurring or joint enhancement. Note that two versions of blurry ambient guidance are provided as shown in Fig. 1: (a) blurry image is aligned with the normal light image, <i>i.e.</i> the normal light image serves as the beginning of the motion, and (b) blurry image is NOT aligned with the normal light image. The former is for deblurring task and the latter is for joint enhancement where misalignment can not be avoided. </p>
 
 		<br>
+		<img src="imgs/misalignment_supp.png">
+		<p>Figure 1. Two different settings for different tasks.</p>
+
+		
 		<!--
 		<p align="left"><font size="5"> 2. Implementation of the Compared Methods</font></p>
 		<p align="left">The code links of all the compared methods are listed in Table 1. Thanks to the authors for sharing their codes, which is very helpful for our research work. For the single-image low-light enhancement methods [2, 3, 4, 5], we all use the officially released pretrained models on LOL dataset [2] for evaluation. For the single-image deblurring methods [6, 7], we retrain the models using the blurry/sharp image pairs in the LEC-LOL dataset. For the joint denoising and deblurring method [8], we follow the same training strategy of LECNet.</p>
@@ -158,25 +162,25 @@
 		<br>
 		-->
 		<p align="left"><font size="5"> 2. Results on Low-Light Inputs at Different Illumination Levels</font></p>
-		<p align="left">In this section, we show the experimental results of using the same long-exposure reference to enhance the low-light images with different illuminance levels. The results can be seen in Fig. 1. We can observe that for the single-image low-light enhancement models [4, 5], the illuminance level of the enhanced image goes up as the input low-light image gradually becomes brighter. Thus, their predictions frequently fall into overexposure or underexposure when the illumination of their inputs is relatively high or low. However, there is no more ambiguity for our LECNet. The predictions from our LECNet all match the illumination of the given long-exposure reference. It also demonstrates that our LECNet obtains the illumination information entirely from the long-exposure image. Therefore, it is not disrupted by the illuminance level of the input low-light image.</p>
+		<p align="left">In this section, we show the experimental results of using the same long-exposure reference to enhance the low-light images with different illuminance levels. The results can be seen in Fig. 2. We can observe that for the single-image low-light enhancement models the illuminance level of the enhanced image goes up as the input low-light image gradually becomes brighter. Thus, their predictions frequently fall into overexposure or underexposure when the illumination of their inputs is relatively high or low. However, there is no more ambiguity for our LECNet. The predictions from our LECNet all match the illumination of the given long-exposure reference. It also demonstrates that our LECNet obtains the illumination information entirely from the long-exposure image. Therefore, it is not disrupted by the illuminance level of the input low-light image.</p>
 		
 		<img src="imgs/diff_input.png">
-		<p>Figure 1. Qualitative results of using 7 different low-light inputs with increasing illuminance levels (Level I: lowest illuminance level, Level VII: highest illuminance level). The results of single-image enhancement methods (KinD++ [4] and RUAS [5]) vary greatly when the input low-light image changes. By contrast, outputs of our LECNet are roughly the same, with the illuminations matching the long-exposure reference.</p>
+		<p>Figure 2. Qualitative results of using 7 different low-light inputs with increasing illuminance levels (Level I: lowest illuminance level, Level VII: highest illuminance level). The results of single-image enhancement methods (KinD++ [4] and RUAS [5]) vary greatly when the input low-light image changes. By contrast, outputs of our LECNet are roughly the same, with the illuminations matching the long-exposure reference.</p>
 		
 		<br>
 		<br>
 		<p align="left"><font size="5"> 3. More Experimental Results </font></p>
-		<p align="left">More visual results of our LECNet compared with other methods are referred to Fig. 2. The results of our LECNet are closer to the ground truth with clear details and consistent illumination levels.</p>
+		<p align="left">More visual results of our LECNet compared with other methods are referred to Fig. 3. The results of our LECNet are closer to the ground truth with clear details and consistent illumination levels.</p>
 		
 		<img src="imgs/results_1.png">
 		
 		<img src="imgs/results_2.png">
 		
 		<img src="imgs/results_3.png">
-		<p>Figure 2. More qualitative comparison with other methods. The top two rows show the results in the LEC-LOL-Syn dataset. The bottom two rows show the results in the LEC-LOL-Real dataset.</p>
+		<p>Figure 3. More qualitative comparison with other methods. The top two rows show the results in the LEC-LOL-Syn dataset. The bottom two rows show the results in the LEC-LOL-Real dataset.</p>
 		<br>
 		<br>
-		<p align="left">We also evaluate how the scale of misalignment in synthetic image pairs effects the performance, as shown in Table 2.</p>
+		<p align="left">We also evaluate how the scale of misalignment in synthetic image pairs effects the performance, as shown in Table 1.</p>
 		<p>Table 1. Results with different misalignment scales</p>
 		<table class='mt'>
 		<tr></tr>
@@ -235,7 +239,7 @@
 		<td align="center">0.1151</td>
 		</tr>
 		</table>
-		<p align="left"> From another perspective, the low light input also acts as a "contexture guidance" for deblurring the blurry input. For this setting, misalignment is introduced not between the blurry input and the ground truth, but between the low light input and the ground truth. The experimental results also show how the "contexture guidance" benifits the deblurring task, as shown in Table 3.
+		<p align="left"> From another perspective, the low light input also acts as a "contexture guidance" for deblurring the blurry input. For this setting, misalignment is introduced not between the blurry input and the ground truth, but between the low light input and the ground truth. The experimental results also show how the "contexture guidance" benifits the deblurring task, as shown in Table 2.
 		
 		<p>Table 2. Evaluation on how low light input benefits deblurring.</p>
 		<table class='mt'>
