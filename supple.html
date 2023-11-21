@@ -63,10 +63,17 @@
 		<br>
 		
 		<p align="left"><font size="5"> 1. Implementation Details</font></p>
-		<p align="left">We adopt the Adam Optimizer [1] with an initial learning rate of 1 × 10<sup>−4</sup> and set hyperparameters at &beta;<sub>1</sub> = 0.9, &beta;<sub>2</sub> = 0.999 and the weight decay parameter equals to 1 × 10<sup>−4</sup>. We randomly crop 256 × 256 patches during training and adopt a two-stage training process. The model is first trained for 1.5 × 10<sup>5</sup> iterations. Then we finetune the model with an initial learning rate of 1 × 10<sup>−5</sup> for 3 × 10<sup>4</sup> iterations. The batch size of both training stages is 8. The model is trained on 4 NVIDIA Titan Xp GPUs. The whole training process takes about 20 hours.</p>
+		<p align="left">We adopt the Adam Optimizer [1] with an initial learning rate of 1 × 10<sup>−4</sup> and set hyperparameters at <i>&beta;</i><sub>1</sub> = 0.9, <i>&beta;</i><sub>2</sub> = 0.999 and the weight decay parameter equals to 1 × 10<sup>−4</sup>. We randomly crop 256 × 256 patches during training and adopt a two-stage training process. The model is first trained for 1.5 × 10<sup>5</sup> iterations. Then we finetune the model with an initial learning rate of 1 × 10<sup>−5</sup> for 3 × 10<sup>4</sup> iterations. The batch size of both training stages is 8. The model is trained on 4 NVIDIA Titan Xp GPUs. The whole training process takes about 20 hours.</p>
+		<p align="left">The dataset is collected with three different DSLRs among different scenes including outdoor scenes without strong light source and indoor scene with the light off in the evening. Some images are omitted because they are too dark to capture any useful information. To collect a triplet of data, <br>
+		1)	find a static low-light scene without moving objects,<br>
+		2)	fix the camera with a tripod,<br>
+		3)	take a photo with short exposure (low light image collected),<br>
+		4)	switch the shutter speed using remote control and take a photo with long exposure (normal light image collected),<br>
+		5)	relax the tripod, take a long exposure photo with apparent motion (blurry ambient guidance collected).</p>
+		<p align="left">We collect 300 triplets of data as an evaluation dataset for low light enhancement or deblurring or joint enhancement. Note that two versions of blurry ambient guidance are provided: a) blurry image is aligned with the normal light image, <i>i.e.</i> the normal light image serves as the beginning of the motion, and b) blurry image is NOT aligned with the normal light image. The former is for deblurring task and the latter is for joint enhancement where misalignment can not be avoided.</p>
+
 		<br>
-		<br>
-		
+		<!--
 		<p align="left"><font size="5"> 2. Implementation of the Compared Methods</font></p>
 		<p align="left">The code links of all the compared methods are listed in Table 1. Thanks to the authors for sharing their codes, which is very helpful for our research work. For the single-image low-light enhancement methods [2, 3, 4, 5], we all use the officially released pretrained models on LOL dataset [2] for evaluation. For the single-image deblurring methods [6, 7], we retrain the models using the blurry/sharp image pairs in the LEC-LOL dataset. For the joint denoising and deblurring method [8], we follow the same training strategy of LECNet.</p>
 		<br>
@@ -99,6 +106,37 @@
 		<th>&emsp;</th>
 		<td><a href="https://github.com/KarelZhang/RUAS">https://github.com/KarelZhang/RUAS</a></td>
 		</tr>
+		
+		<tr>
+		<td>DRBN [5]</td>
+		<th>&emsp;</th>
+		<td><a href="https://github.com/KarelZhang/RUAS">https://github.com/KarelZhang/RUAS</a></td>
+		</tr>
+		
+		
+		<tr>
+		<td>Zero-DCE [5]</td>
+		<th>&emsp;</th>
+		<td><a href="https://github.com/KarelZhang/RUAS">https://github.com/KarelZhang/RUAS</a></td>
+		</tr>
+		
+		<tr>
+		<td>EnlightenGAN [5]</td>
+		<th>&emsp;</th>
+		<td><a href="https://github.com/KarelZhang/RUAS">https://github.com/KarelZhang/RUAS</a></td>
+		</tr>
+		
+		<tr>
+		<td>DSN[5]</td>
+		<th>&emsp;</th>
+		<td><a href="https://github.com/KarelZhang/RUAS">https://github.com/KarelZhang/RUAS</a></td>
+		</tr>
+		
+		
+		
+		
+		
+		
 		<tr>
 		<td>MPRNet [6]</td>
 		<th>&emsp;</th>
@@ -118,7 +156,8 @@
 		
 		<br>
 		<br>
-		<p align="left"><font size="5"> 3. Results on Low-Light Inputs at Different Illumination Levels</font></p>
+		-->
+		<p align="left"><font size="5"> 2. Results on Low-Light Inputs at Different Illumination Levels</font></p>
 		<p align="left">In this section, we show the experimental results of using the same long-exposure reference to enhance the low-light images with different illuminance levels. The results can be seen in Fig. 1. We can observe that for the single-image low-light enhancement models [4, 5], the illuminance level of the enhanced image goes up as the input low-light image gradually becomes brighter. Thus, their predictions frequently fall into overexposure or underexposure when the illumination of their inputs is relatively high or low. However, there is no more ambiguity for our LECNet. The predictions from our LECNet all match the illumination of the given long-exposure reference. It also demonstrates that our LECNet obtains the illumination information entirely from the long-exposure image. Therefore, it is not disrupted by the illuminance level of the input low-light image.</p>
 		
 		<img src="imgs/diff_input.png">
@@ -126,7 +165,7 @@
 		
 		<br>
 		<br>
-		<p align="left"><font size="5"> 4. More Experimental Results </font></p>
+		<p align="left"><font size="5"> 3. More Experimental Results </font></p>
 		<p align="left">More visual results of our LECNet compared with other methods are referred to Fig. 2. The results of our LECNet are closer to the ground truth with clear details and consistent illumination levels.</p>
 		
 		<img src="imgs/results_1.png">
@@ -137,6 +176,100 @@
 		<p>Figure 2. More qualitative comparison with other methods. The top two rows show the results in the LEC-LOL-Syn dataset. The bottom two rows show the results in the LEC-LOL-Real dataset.</p>
 		<br>
 		<br>
+		<p align="left">We also evaluate how the scale of misalignment in synthetic image pairs effects the performance, as shown in Table 2.</p>
+		<p>Table 1. Results with different misalignment scales</p>
+		<table class='mt'>
+		<tr></tr>
+		<tr>
+		<th align="center">Misalignment</th>
+		<th>&emsp; </th>
+		<th align="center">PSNR</th>
+		<th>&emsp; </th>
+		<th align="center">SSIM</th>
+		<th>&emsp; </th>
+		<th align="center">LPIPS</th>
+		</tr>
+		<tr>
+		<td align="center">s = 0</td>
+		<th>&emsp; </th>
+		<td align="center">31.21</td>
+		<th>&emsp; </th>
+		<td align="center">0.9033</td>
+		<th>&emsp; </th>
+		<td align="center">0.0873</td>
+		</tr>
+		<tr>
+		<td align="center">s = 10</td>
+		<th>&emsp; </th>
+		<td align="center">30.86</td>
+		<th>&emsp; </th>
+		<td align="center">0.9043</td>
+		<th>&emsp; </th>
+		<td align="center">0.0880<td>
+		</tr>
+		<tr>
+		<td align="center">s = 20 (Ours)</td>
+		<th>&emsp; </th>
+		<td align="center">30.61</td>
+		<th>&emsp; </th>
+		<td align="center">0.9029</td>
+		<th>&emsp; </th>
+		<td align="center">0.0894</td>
+		</tr>
+		<tr>
+		<td align="center">s = 30</td>
+		<th>&emsp; </th>
+		<td align="center">30.22</td>
+		<th>&emsp; </th>
+		<td align="center">0.8961</td>
+		<th>&emsp; </th>
+		<td align="center">0.0882</td>
+		</tr>
+		<tr>
+		<td align="center">s = 40</td>
+		<th>&emsp; </th>
+		<td align="center">29.71</td>
+		<th>&emsp; </th>
+		<td align="center">0.8733</td>
+		<th>&emsp; </th>
+		<td align="center">0.1151</td>
+		</tr>
+		</table>
+		<p align="left"> From another perspective, the low light input also acts as a "contexture guidance" for deblurring the blurry input. For this setting, misalignment is introduced not between the blurry input and the ground truth, but between the low light input and the ground truth. The experimental results also show how the "contexture guidance" benifits the deblurring task, as shown in Table 3.
+		
+		<p>Table 2. Evaluation on how low light input benefits deblurring.</p>
+		<table class='mt'>
+		<tr></tr>
+		<tr>
+		<th align="center">Deblurring</th>
+		<th>&emsp; </th>
+		<th align="center">PSNR</th>
+		<th>&emsp; </th>
+		<th align="center">SSIM</th>
+		<th>&emsp; </th>
+		<th align="center">LPIPS</th>
+		</tr>
+		<tr>
+		<td align="center">w/o the low light input</td>
+		<th>&emsp; </th>
+		<td align="center">19.84</td> 
+		<th>&emsp; </th>
+		<td align="center">0.7015 </td>
+		<th>&emsp; </th>
+		<td align="center">0.2812</td>
+		</tr>
+
+		<tr>
+		<td align="center">w/ the low light input</td>
+		<th>&emsp; </th>
+		<td align="center">22.14</td>
+		<th>&emsp; </th>
+		<td align="center">0.8051</td>
+		<th>&emsp; </th>
+		<td align="center">0.1623</td>
+		</tr>
+		</table>
+		<!--
 		<p align="left">References</p>
 		<p align="left">[1] Diederik P. Kingma and Jimmy Ba, "Adam: A method for stochastic optimization," in ICLR, 2015.</p>
 		<p align="left">[2] Chen Wei, Wenjing Wang, Wenhan Yang, and Jiaying Liu, "Deep retinex decomposition for low-light enhancement," in BMVC, 2018.</p>
@@ -146,6 +279,7 @@
 		<p align="left">[6] Syed Waqas Zamir, Aditya Arora, Salman Khan, Munawar Hayat, Fahad Shahbaz Khan, Ming-Hsuan Yang, and Ling Shao, "Multi-stage progressive image restoration," in CVPR, 2021.</p>
 		<p align="left">[7] Sung-Jin Cho, Seo-Won Ji, Jun-Pyo Hong, Seung-Won Jung, and Sung-Jea Ko, "Rethinking coarse-to-fine approach in single image deblurring," in ICCV, 2021.</p>
 		<p align="left">[8] Janne Mustaniemi, Juho Kannala, Jiri Matas, Simo Sarkka, and Janne Heikkila, "LSD2 - joint denoising and deblurring of short and long exposure images with cnns," in BMVC, 2020.</p>
+		-->
 		
 	</div>
   </body>
