@@ -61,6 +61,9 @@
 		<p> Haofeng Huang, Shuhong Zheng, Wenhan Yang, Ling-Yu Duan, Jiaying Liu</p>
 		<br>
 		<br>
+		<video width="640" height="360" controls>
+		  <source src="videos/LECNet_demo_tiny.mp4" type="video/mp4">
+		</video>
 		
 		<p align="left"><font size="5"> 1. Implementation Details</font></p>
 		<p align="left">We adopt the Adam Optimizer [1] with an initial learning rate of 1 × 10<sup>−4</sup> and set hyperparameters at <i>&beta;</i><sub>1</sub> = 0.9, <i>&beta;</i><sub>2</sub> = 0.999 and the weight decay parameter equals to 1 × 10<sup>−4</sup>. We randomly crop 256 × 256 patches during training and adopt a two-stage training process. The model is first trained for 1.5 × 10<sup>5</sup> iterations. Then we finetune the model with an initial learning rate of 1 × 10<sup>−5</sup> for 3 × 10<sup>4</sup> iterations. The batch size of both training stages is 8. The model is trained on 4 NVIDIA Titan Xp GPUs. The whole training process takes about 20 hours.</p>
