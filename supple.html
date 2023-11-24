@@ -180,8 +180,112 @@
 		<p>Figure 3. More qualitative comparison with other methods. The top two rows show the results in the LEC-LOL-Syn dataset. The bottom two rows show the results in the LEC-LOL-Real dataset.</p>
 		<br>
 		<br>
+		<p align="left">Results on MIT-Adobe FiveK are presented. We synthesize ambient guidance on this dataset using the same setting with our LEC-LOL-Syn. To verify the generalization, all models are trained on the LEC-LOL-Syn and evaluated on MIT-Adobe FiveK.</p>
+		<p>Table 1. Quantitative comparisons on other datasets. <b>Bold</b> indicates the best performance.</p>
+		<table class='mt'>
+		<tr></tr>
+		<tr>
+		<th align="center">Methods</th>
+		<th>&emsp; </th>
+		<th align="center">PSNR</th>
+		<th>&emsp; </th>
+		<th align="center">SSIM</th>
+		<th>&emsp; </th>
+		<th align="center">LPIPS</th>
+		</tr>
+		<tr>
+		<td align="center">KinD</td>
+		<th>&emsp; </th>
+		<td align="center">14.71</td> 
+		<th>&emsp; </th>
+		<td align="center">0.756 </td>
+		<th>&emsp; </th>
+		<td align="center">0.176</td>
+		</tr>
+		
+		<tr>
+		<td align="center">RUAS</td>
+		<th>&emsp; </th>
+		<td align="center">9.53</td> 
+		<th>&emsp; </th>
+		<td align="center">0.610 </td>
+		<th>&emsp; </th>
+		<td align="center">0.301</td>
+		</tr>
+
+		<tr>
+		<td align="center">Retinex-Net</td>
+		<th>&emsp; </th>
+		<td align="center">12.30</td>
+		<th>&emsp; </th>
+		<td align="center">0.687</td>
+		<th>&emsp; </th>
+		<td align="center">0.258</td>
+		</tr>
+		
+		<tr>
+		<td align="center">CERL</td>
+		<th>&emsp; </th>
+		<td align="center">15.83</td>
+		<th>&emsp; </th>
+		<td align="center">0.719</td>
+		<th>&emsp; </th>
+		<td align="center">0.222</td>
+		</tr>
+		
+		<tr>
+		<td align="center">Restormer</td>
+		<th>&emsp; </th>
+		<td align="center">24.13</td>
+		<th>&emsp; </th>
+		<td align="center">0.811</td>
+		<th>&emsp; </th>
+		<td align="center">0.156</td>
+		</tr>
+		
+		<tr>
+		<td align="center">MAXIM</td>
+		<th>&emsp; </th>
+		<td align="center">20.45</td>
+		<th>&emsp; </th>
+		<td align="center">0.683</td>
+		<th>&emsp; </th>
+		<td align="center">0.331</td>
+		</tr>
+		
+		<tr>
+		<td align="center">DJF</td>
+		<th>&emsp; </th>
+		<td align="center">22.64</td>
+		<th>&emsp; </th>
+		<td align="center">0.792</td>
+		<th>&emsp; </th>
+		<td align="center">0.399</td>
+		</tr>
+		
+		<tr>
+		<td align="center">LSD2</td>
+		<th>&emsp; </th>
+		<td align="center">23.51</td>
+		<th>&emsp; </th>
+		<td align="center">0.801</td>
+		<th>&emsp; </th>
+		<td align="center">0.205</td>
+		</tr>
+		
+		<tr>
+		<td align="center">Ours</td>
+		<th>&emsp; </th>
+		<td align="center"><b>25.33</b></td>
+		<th>&emsp; </th>
+		<td align="center"><b>0.823</b></td>
+		<th>&emsp; </th>
+		<td align="center"><b>0.132</b></td>
+		</tr>
+		</table>
+		
 		<p align="left">We also evaluate how the scale of misalignment in synthetic image pairs effects the performance, as shown in Table 1.</p>
-		<p>Table 1. Results with different misalignment scales</p>
+		<p>Table 2. Results with different misalignment scales</p>
 		<table class='mt'>
 		<tr></tr>
 		<tr>
@@ -241,7 +345,7 @@
 		</table>
 		<p align="left"> From another perspective, the low light input also acts as a "contexture guidance" for deblurring the blurry input. For this setting, misalignment is introduced not between the blurry input and the ground truth, but between the low light input and the ground truth. The experimental results also show how the "contexture guidance" benifits the deblurring task, as shown in Table 2.
 		
-		<p>Table 2. Evaluation on how low light input benefits deblurring.</p>
+		<p>Table 3. Evaluation on how low light input benefits deblurring.</p>
 		<table class='mt'>
 		<tr></tr>
 		<tr>
